@@ -1,0 +1,15 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .search-input {
+    width: 50rem;
+
+    // svg {
+    //   color: var(--text-color-lighter);
+    //   width: 2rem;
+    //   height: 2rem;
+    // }
+  }
+}

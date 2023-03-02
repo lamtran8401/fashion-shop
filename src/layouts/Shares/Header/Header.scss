@@ -5,7 +5,6 @@
   z-index: 1;
   width: 100%;
   height: 6.4rem;
-  padding: 0 80px;
   box-shadow: var(--get-shadow);
   display: flex;
 
@@ -23,11 +22,13 @@
       width: 100%;
       height: 100%;
     }
+
     &-img {
       width: 100%;
       object-fit: cover;
     }
   }
+
   .top-nav {
     margin-left: 2rem;
     flex: 1;
@@ -35,6 +36,7 @@
 
     .ant-menu {
       height: 100%;
+      border-bottom: none;
 
       .ant-menu-item {
         display: flex;
@@ -43,4 +45,67 @@
       }
     }
   }
+
+  .top-action {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+
+    .btn-action {
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: var(--primary-color-light);
+      }
+    }
+
+    .ant-divider {
+      height: 2rem;
+      margin: 0 2rem;
+    }
+    a {
+      color: var(--text-color-light);
+    }
+
+    .ant-badge {
+      margin-left: 2rem;
+
+      .ant-badge-count {
+        background-color: var(--primary-color);
+      }
+
+      .top-bag-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    .top-user {
+      margin-left: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .top-user-icon {
+        width: 2.6rem;
+        height: 2.6rem;
+      }
+    }
+
+    .top-bag-icon,
+    .top-user-icon {
+      color: var(--text-color-light);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: var(--primary-color-light);
+      }
+    }
+  }
+}
+
+.ant-drawer-header-title {
+  flex-direction: row-reverse;
 }
