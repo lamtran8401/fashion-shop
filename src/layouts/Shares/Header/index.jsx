@@ -3,9 +3,9 @@ import { ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import logo from '../../../assets/logo-header.png'
-import Search from '../../../components/Search'
+import Search from '@/components/Search'
 import './Header.scss'
-import { useCurrentPath } from '../../../hooks'
+import { useCurrentPath } from '@/hooks'
 
 const HeaderComp = Layout.Header
 
