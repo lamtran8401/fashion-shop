@@ -13,9 +13,6 @@ const UserLayout = () => {
       <Link to='/user/address'>address</Link>
       <br />
       <Link to='/user/order'>order</Link>
-      <br />
-      <br />
-      <Link to='/'>Home</Link>
     </BaseLayout>
   )
 }

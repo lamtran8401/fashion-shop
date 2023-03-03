@@ -2,7 +2,7 @@ import { Badge, Divider, Drawer, Layout, Menu } from 'antd'
 import { ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import logo from '../../../assets/logo-header.png'
+import logo from '@/assets/logo-header.png'
 import Search from '@/components/Search'
 import './Header.scss'
 import { useCurrentPath } from '@/hooks'
@@ -15,8 +15,20 @@ const items = [
     label: <Link to='/'>Home</Link>,
   },
   {
-    key: '/user',
-    label: <Link to='/user'>Sản phẩm</Link>,
+    key: '/product',
+    label: <Link to='/product'>Sản phẩm</Link>,
+  },
+  {
+    key: '/top',
+    label: <Link to='/#'>Top</Link>,
+  },
+  {
+    key: '/bottom',
+    label: <Link to='/#'>Bottom</Link>,
+  },
+  {
+    key: '/accessories',
+    label: <Link to='/#'>Accessories</Link>,
   },
 ]
 
@@ -33,7 +45,6 @@ const Header = () => {
     setOpenDrawer(false)
   }
 
-  console.log('header re-render')
   return (
     <>
       <HeaderComp id='header' className='container'>

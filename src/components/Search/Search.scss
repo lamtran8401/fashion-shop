@@ -1,10 +1,11 @@
 .search-bar {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .search-input {
-    width: 50rem;
+    width: 80%;
 
     // svg {
     //   color: var(--text-color-lighter);

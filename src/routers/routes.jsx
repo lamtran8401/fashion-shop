@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { MainLayout, UserLayout } from '../layouts'
-import { Home, Address, Account, Order, Error } from '../pages'
+import { MainLayout, UserLayout, ProductLayout } from '@/layouts'
+import { Home, Address, Account, Order, Error } from '@/pages'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
       },
     ],
     errorElement: <Error />,
+  },
+  {
+    path: '/product',
+    element: <ProductLayout />,
   },
   {
     path: '/user',

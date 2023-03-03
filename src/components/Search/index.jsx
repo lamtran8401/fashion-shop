@@ -27,8 +27,6 @@ const Search = ({ size = 'small', placeholder = 'Search...' }) => {
     if (value) console.log('search:', value)
   }
 
-  console.log('search re-render')
-
   return (
     <div className='search-bar'>
       <Input.Search
