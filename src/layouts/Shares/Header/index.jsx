@@ -1,13 +1,12 @@
-import { Badge, Divider, Drawer, Layout, Menu } from 'antd'
+import { Badge, Button, Divider, Layout, Menu } from 'antd'
 import { ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import logo from '@/assets/logo-header.png'
-import Search from '@/components/Search'
+import { Search } from '@/components'
 import './Header.scss'
 import { useCurrentPath } from '@/hooks'
-
-const HeaderComp = Layout.Header
+import { Cart } from '@/features/cart/components'
+import useToggle from '@/hooks/useToggle'
 
 const items = [
   {
@@ -35,19 +34,10 @@ const items = [
 const Header = () => {
   const currentMenuPath = useCurrentPath()
 
-  const [openDrawer, setOpenDrawer] = useState(false)
-
-  const showDrawer = () => {
-    setOpenDrawer(true)
-  }
-
-  const handleCloseDrawer = () => {
-    setOpenDrawer(false)
-  }
-
+  const [openCart, { toggleOn, toggleOff }] = useToggle()
   return (
     <>
-      <HeaderComp id='header' className='container'>
+      <Layout.Header id='header' className='container'>
         <div className='logo'>
           <Link to='/'>
             <img src={logo} alt='logo' className='logo-img' />
@@ -64,27 +54,22 @@ const Header = () => {
         </nav>
         <Search placeholder='Search for any product...' />
         <div className='top-action'>
-          <Link to='#' className='btn-action'>
-            Sign in
-          </Link>
-          <Divider type='vertical' />
-          <Link to='#' className='btn-action'>
+          <Link to='/auth/sign-up' className='btn-action'>
             Create Account
           </Link>
+          <Divider type='vertical' />
+          <Link to='/auth/sign-in' className='btn-action'>
+            <Button type='primary'>Sign in</Button>
+          </Link>
           <Badge count={2} size='small'>
-            <ShoppingBagIcon onClick={showDrawer} className='top-bag-icon' />
+            <ShoppingBagIcon onClick={toggleOn} className='top-bag-icon' />
           </Badge>
           <Link to='/user' className='top-user'>
             <UserCircleIcon className='top-user-icon' />
           </Link>
         </div>
-      </HeaderComp>
-      <Drawer
-        title='Shopping bag'
-        headerStyle={{ borderBottom: 'none' }}
-        open={openDrawer}
-        onClose={handleCloseDrawer}
-      />
+      </Layout.Header>
+      <Cart open={openCart} onClose={toggleOff} />
     </>
   )
 }

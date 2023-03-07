@@ -1,6 +1,6 @@
 import { ConfigProvider } from 'antd'
 
-const GlobalProvider = ({ children }) => {
+const GlobalStyle = ({ children }) => {
   return (
     <ConfigProvider
       theme={{
@@ -20,4 +20,4 @@ const GlobalProvider = ({ children }) => {
   )
 }
 
-export default GlobalProvider
+export default GlobalStyle

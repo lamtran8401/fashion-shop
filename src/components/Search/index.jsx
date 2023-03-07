@@ -1,7 +1,7 @@
-import { useEffect, useState, memo } from 'react'
-import { useDebounce } from '../../hooks'
-import './Search.scss'
+import { useDebounce } from '@/hooks'
 import { Input } from 'antd'
+import { memo, useEffect, useState } from 'react'
+import './Search.scss'
 
 const Search = ({ size = 'small', placeholder = 'Search...' }) => {
   const [searchValue, setSearchValue] = useState('')

@@ -1,0 +1,17 @@
+.ant-card {
+  &.product {
+    cursor: pointer;
+    box-shadow: none;
+  }
+
+  .ant-card-cover > .product__img {
+    border-radius: 8px;
+  }
+
+  &:hover {
+    .product__img {
+      transition: opacity 0.2s ease;
+      opacity: 0.85;
+    }
+  }
+}

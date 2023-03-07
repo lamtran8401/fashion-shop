@@ -19,7 +19,6 @@ const Error = () => {
           Contact Support
         </Button>
       </div>
-      <Input />
     </div>
   )
 }
