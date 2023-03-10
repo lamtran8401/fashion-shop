@@ -8,5 +8,5 @@
   "bracketSameLine": true,
   "jsxSingleQuote": true,
   "endOfLine": "lf",
-  "printWidth": 90
+  "printWidth": 100
 }

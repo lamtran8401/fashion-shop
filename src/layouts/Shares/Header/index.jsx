@@ -1,12 +1,12 @@
-import { Badge, Button, Divider, Layout, Menu } from 'antd'
-import { ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
 import logo from '@/assets/logo-header.png'
 import { Search } from '@/components'
-import './Header.scss'
-import { useCurrentPath } from '@/hooks'
 import { Cart } from '@/features/cart/components'
+import { useCurrentPath } from '@/hooks'
 import useToggle from '@/hooks/useToggle'
+import { ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Badge, Button, Divider, Layout, Menu } from 'antd'
+import { Link } from 'react-router-dom'
+import './Header.scss'
 
 const items = [
   {

@@ -1,4 +1,3 @@
-export { default as MainLayout } from './MainLayout'
-export { default as UserLayout } from './UserLayout'
-export { default as ProductLayout } from './ProductLayout'
 export { default as AuthLayout } from './AuthLayout'
+export { default as MainLayout } from './MainLayout'
+export { default as ProductLayout } from './ProductLayout'

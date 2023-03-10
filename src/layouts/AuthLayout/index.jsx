@@ -1,6 +1,7 @@
 import logo from '@/assets/logo-header.png'
 import { Link, Outlet } from 'react-router-dom'
 import './AuthLayout.scss'
+import './Form.scss'
 
 const AuthLayout = () => {
   return (
