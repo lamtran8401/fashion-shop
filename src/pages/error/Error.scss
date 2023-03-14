@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   &-wrapper {
     font-family: 'Inter', 'Arimo', 'Roboto', sans-serif;
     margin: 0 auto;
@@ -45,7 +45,7 @@
 
     .ant-btn-link {
       margin-left: 2rem;
-      color: var(--text-color-dark);
+      color: var(--text-color);
       font-size: 1.4rem;
       font-weight: 700;
       display: flex;
@@ -53,7 +53,7 @@
       justify-content: center;
 
       svg {
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         width: 1.5rem;
         height: 1.5rem;
         stroke-width: 2.5;
