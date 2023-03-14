@@ -1,4 +1,6 @@
 import logo from '@/assets/logo-header.png'
+import { Loading } from '@/components'
+import { Suspense } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import './AuthLayout.scss'
 import './Form.scss'
@@ -8,10 +10,12 @@ const AuthLayout = () => {
     <div className='auth-layout'>
       <div className='auth-layout__logo'>
         <Link to='/'>
-          <img src={logo} alt='Brand Logo' className='auth-layout__logo' />
+          <img src={logo} alt='Brand Logo' loading='lazy' className='auth-layout__logo' />
         </Link>
       </div>
-      <Outlet />
+      <Suspense fallback={<Loading />}>
+        <Outlet />
+      </Suspense>
     </div>
   )
 }

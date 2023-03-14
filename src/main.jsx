@@ -1,14 +1,17 @@
-import React from 'react'
+import { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
-import { AuthProvider } from './context'
 import App from './App'
+import { Loading } from './components'
 import GlobalStyle from './components/GlobalStyle'
+import { AuthProvider } from './context'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <AuthProvider>
     <GlobalStyle>
-      <App />
+      <Suspense fallback={<Loading />}>
+        <App />
+      </Suspense>
     </GlobalStyle>
   </AuthProvider>
   // </React.StrictMode>

@@ -1,5 +1,6 @@
 import femaleAvatar from '@/assets/images/user-female-avatar.png'
 import maleAvatar from '@/assets/images/user-male-avatar.png'
+import { Loading } from '@/components'
 import { useCurrentPath } from '@/hooks'
 import {
   IdentificationIcon,
@@ -8,7 +9,7 @@ import {
   QueueListIcon,
 } from '@heroicons/react/24/outline'
 import { Menu, Typography } from 'antd'
-import { useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import './User.scss'
 
@@ -42,7 +43,7 @@ const User = ({ gender = 'male', name = 'Customer Name' }) => {
     <div className='user-page'>
       <section className='user-page__menu'>
         <div className='user-page__menu__avatar'>
-          <img src={userAvatar.current} alt='User avatar' className='user__avatar' />
+          <img src={userAvatar.current} alt='User avatar' loading='lazy' className='user__avatar' />
           <Typography.Title level={4} className='user__name'>
             {name}
           </Typography.Title>
@@ -55,7 +56,9 @@ const User = ({ gender = 'male', name = 'Customer Name' }) => {
         />
       </section>
       <section className='user-page__content'>
-        <Outlet />
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
       </section>
     </div>
   )

@@ -1,8 +1,15 @@
-import { AuthLayout, MainLayout } from '@/layouts'
-import { Error, Home, User } from '@/pages'
-import { SignIn, SignUp } from '@/pages/auth'
-import { Account, Address, Order } from '@/pages/user'
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+const MainLayout = lazy(() => import('@/layouts').then(module => ({ default: module.MainLayout })))
+const AuthLayout = lazy(() => import('@/layouts').then(module => ({ default: module.AuthLayout })))
+const Error = lazy(() => import('@/pages/error'))
+const Home = lazy(() => import('@/pages/home'))
+const User = lazy(() => import('@/pages/user'))
+const SignIn = lazy(() => import('@/pages/auth/SignIn'))
+const SignUp = lazy(() => import('@/pages/auth/SignUp'))
+const Account = lazy(() => import('@/pages/user/Account'))
+const Address = lazy(() => import('@/pages/user/Address'))
+const Order = lazy(() => import('@/pages/user/Order'))
 
 const router = createBrowserRouter([
   {
@@ -14,11 +21,17 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: 'product',
+        element: <div>product</div>,
+      },
+      {
         path: 'user',
         element: <User />,
-        errorElement: <Error />,
         children: [
-          { path: '', element: <Account /> },
+          {
+            path: '',
+            element: <Account />,
+          },
           {
             path: 'account',
             element: <Account />,
@@ -32,17 +45,6 @@ const router = createBrowserRouter([
             element: <Order />,
           },
         ],
-      },
-    ],
-    errorElement: <Error />,
-  },
-  {
-    path: '/product',
-    element: <MainLayout />,
-    children: [
-      {
-        path: '',
-        element: <div>product</div>,
       },
     ],
   },

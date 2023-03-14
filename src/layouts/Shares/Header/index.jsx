@@ -40,7 +40,7 @@ const Header = () => {
       <Layout.Header id='header' className='container'>
         <div className='logo'>
           <Link to='/'>
-            <img src={logo} alt='logo' className='logo-img' />
+            <img src={logo} alt='logo' loading='lazy' className='logo-img' />
           </Link>
         </div>
         <nav className='top-nav'>
