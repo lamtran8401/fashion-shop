@@ -1,4 +1,5 @@
-import { AuthLayout, MainLayout } from '@/layouts'
+import AuthLayout from '@/layouts/AuthLayout'
+import MainLayout from '@/layouts/MainLayout'
 import { SignIn, SignUp } from '@/pages/auth'
 import Error from '@/pages/error'
 import Home from '@/pages/home'
