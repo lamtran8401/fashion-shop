@@ -1,15 +1,18 @@
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+// layouts
 const MainLayout = lazy(() => import('@/layouts').then(module => ({ default: module.MainLayout })))
 const AuthLayout = lazy(() => import('@/layouts').then(module => ({ default: module.AuthLayout })))
+// pages
 const Error = lazy(() => import('@/pages/error'))
 const Home = lazy(() => import('@/pages/home'))
 const User = lazy(() => import('@/pages/user'))
 const SignIn = lazy(() => import('@/pages/auth/signin'))
 const SignUp = lazy(() => import('@/pages/auth/signup'))
-const Account = lazy(() => import('@/pages/user/Account'))
-const Address = lazy(() => import('@/pages/user/Address'))
-const Order = lazy(() => import('@/pages/user/Order'))
+// children page
+const Account = lazy(() => import('@/pages/user/account'))
+const Address = lazy(() => import('@/pages/user/address'))
+const Order = lazy(() => import('@/pages/user/order'))
 
 const router = createBrowserRouter([
   {
