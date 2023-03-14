@@ -1,7 +1,8 @@
 import { AuthLayout, MainLayout } from '@/layouts'
-import { Error, Home, User } from '@/pages'
 import { SignIn, SignUp } from '@/pages/auth'
-import { Account, Address, Order } from '@/pages/user'
+import Error from '@/pages/error'
+import Home from '@/pages/home'
+import User, { Account, Address, Order } from '@/pages/user'
 import { createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
