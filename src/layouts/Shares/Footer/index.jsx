@@ -1,5 +1,6 @@
-import './Footer.scss'
 import { Layout, Typography } from 'antd'
+import { memo } from 'react'
+import './Footer.scss'
 
 const Footer = () => {
   return (
@@ -11,4 +12,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default memo(Footer)

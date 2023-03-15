@@ -64,8 +64,4 @@ const User = ({ gender = 'male', name = 'Customer Name' }) => {
   )
 }
 
-export { default as Account } from './account'
-export { default as Address } from './address'
-export { default as Order } from './order'
-
 export default User

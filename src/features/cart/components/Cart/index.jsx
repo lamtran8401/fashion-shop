@@ -1,33 +1,36 @@
-import { Button, Drawer, Typography } from 'antd'
+import emptyBagImg from '@/assets/images/empty-bag.jpeg'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { memo, useMemo } from 'react'
-import emptyBagImg from '@/assets/empty-bag.jpeg'
+import { Button, Drawer, Typography } from 'antd'
+import { memo, useCallback } from 'react'
+import { useCart } from '../../hooks'
 import './Cart.scss'
 
-const FooterCart = ({ total = 0 }) => {
+const FooterCart = memo(({ total, onCheckOut }) => {
   return (
     <div className='cart__footer'>
       <div className='cart__footer-total'>
         <div className='cart__footer-total-wrapper'>
           <Typography.Text className='cart__footer-total__title'>Total</Typography.Text>
           <Typography.Text className='cart__footer-total__price'>
-            ${total}
+            ${total.totalPrice}
           </Typography.Text>
         </div>
         <Typography.Paragraph className='cart__footer-total__text'>
           Shipping and taxes calculated at checkout.
         </Typography.Paragraph>
       </div>
-      <Button type='primary' size='large' className='cart__footer-btn'>
+      <Button type='primary' size='large' className='cart__footer-btn' onClick={onCheckOut}>
         Checkout
       </Button>
     </div>
   )
-}
+})
 
-const Cart = ({ title = 'Shopping Cart', open, onClose }) => {
-  const total = useMemo(() => {
-    return 0
+const Cart = ({ title = 'Shopping Cart' }) => {
+  const { openCart, toggleOff, products, total } = useCart()
+
+  const handleCheckout = useCallback(() => {
+    console.log('checkout')
   })
 
   return (
@@ -37,13 +40,13 @@ const Cart = ({ title = 'Shopping Cart', open, onClose }) => {
       title={title}
       closeIcon={<XMarkIcon className='cart__close-icon' />}
       headerStyle={{ borderBottom: 'none' }}
-      footer={<FooterCart total={total} />}
+      footer={<FooterCart total={total} onCheckOut={handleCheckout} />}
       footerStyle={{ padding: '16px 24px' }}
-      open={open}
-      onClose={onClose}>
+      open={openCart}
+      onClose={toggleOff}>
       <div className='cart__empty'>
         <p className='cart__empty-text'>Your cart is empty</p>
-        <img className='cart__empty-img' src={emptyBagImg} alt='Empty cart image' />
+        <img className='cart__empty-img' src={emptyBagImg} alt='Empty cart image' loading='lazy' />
       </div>
       {/* <BagItem item={{ name: 'P1', price: '200', quantity: '2' }} /> */}
     </Drawer>
