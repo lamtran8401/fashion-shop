@@ -1,4 +1,4 @@
-import { SignInForm } from '@/features/auth/components'
+import SignInForm from '@/features/auth/components/SignInForm'
 
 const SignIn = () => {
   return (

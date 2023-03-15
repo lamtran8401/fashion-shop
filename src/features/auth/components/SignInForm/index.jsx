@@ -1,9 +1,4 @@
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  LockClosedIcon,
-  UserIcon,
-} from '@heroicons/react/24/outline'
+import { EyeIcon, EyeSlashIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Button, Checkbox, Form, Input, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 

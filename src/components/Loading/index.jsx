@@ -1,6 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { memo } from 'react'
 import './Loading.scss'
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
@@ -13,4 +12,4 @@ const Loading = () => {
   )
 }
 
-export default memo(Loading)
+export default Loading

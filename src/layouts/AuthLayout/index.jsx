@@ -1,5 +1,5 @@
 import logo from '@/assets/logo-header.png'
-import { Loading } from '@/components'
+import Loading from '@/components/Loading'
 import { Suspense } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import './AuthLayout.scss'

@@ -1,20 +1,21 @@
-import { Suspense } from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { Loading } from './components'
 import GlobalStyle from './components/GlobalStyle'
-import { AuthProvider, CartProvider } from './context'
+import Loading from './components/Loading'
+import AuthProvider from './context/AuthContext'
+import CartProvider from './context/CartContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  <AuthProvider>
-    <GlobalStyle>
-      <Suspense fallback={<Loading />}>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </Suspense>
-    </GlobalStyle>
-  </AuthProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <AuthProvider>
+      <GlobalStyle>
+        <Suspense fallback={<Loading />}>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </Suspense>
+      </GlobalStyle>
+    </AuthProvider>
+  </React.StrictMode>
 )

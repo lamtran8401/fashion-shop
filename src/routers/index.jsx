@@ -1,8 +1,8 @@
+import MainLayout from '@/layouts/MainLayout'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 // layouts
-const MainLayout = lazy(() => import('@/layouts').then(module => ({ default: module.MainLayout })))
-const AuthLayout = lazy(() => import('@/layouts').then(module => ({ default: module.AuthLayout })))
+const AuthLayout = lazy(() => import('@/layouts/AuthLayout'))
 // pages
 const Error = lazy(() => import('@/pages/error'))
 const Home = lazy(() => import('@/pages/home'))
@@ -18,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: '',
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <AuthLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: 'sign-in',

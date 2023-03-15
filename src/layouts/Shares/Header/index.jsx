@@ -1,40 +1,40 @@
 import logo from '@/assets/logo-header.png'
-import { Search } from '@/components'
+import Search from '@/components/Search'
 import { useCart } from '@/features/cart/hooks'
-import { useCurrentPath } from '@/hooks'
+import useCurrentPath from '@/hooks/useCurrentPath'
 import { ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Badge, Button, Divider, Layout, Menu } from 'antd'
-import { memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Header.scss'
 
 const items = [
   {
     key: '/',
-    label: <Link to='/'>Home</Link>,
+    label: <NavLink to='/'>Home</NavLink>,
   },
   {
     key: '/product',
-    label: <Link to='/product'>Sản phẩm</Link>,
+    label: <NavLink to='/product'>Sản phẩm</NavLink>,
   },
   {
     key: '/top',
-    label: <Link to='/#'>Top</Link>,
+    label: <NavLink to='/#'>Top</NavLink>,
   },
   {
     key: '/bottom',
-    label: <Link to='/#'>Bottom</Link>,
+    label: <NavLink to='/#'>Bottom</NavLink>,
   },
   {
     key: '/accessories',
-    label: <Link to='/#'>Accessories</Link>,
+    label: <NavLink to='/#'>Accessories</NavLink>,
   },
 ]
 
 const Header = () => {
   const currentMenuPath = useCurrentPath()
-
   const { toggleOn } = useCart()
+
+  console.log('header')
 
   return (
     <Layout.Header id='header' className='container'>
@@ -72,4 +72,4 @@ const Header = () => {
   )
 }
 
-export default memo(Header)
+export default Header

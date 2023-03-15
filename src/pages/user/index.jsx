@@ -1,7 +1,8 @@
 import femaleAvatar from '@/assets/images/user-female-avatar.png'
 import maleAvatar from '@/assets/images/user-male-avatar.png'
-import { Loading } from '@/components'
-import { useCurrentPath } from '@/hooks'
+
+import Loading from '@/components/Loading'
+import useCurrentPath from '@/hooks/useCurrentPath'
 import {
   IdentificationIcon,
   LockClosedIcon,
