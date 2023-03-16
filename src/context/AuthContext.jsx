@@ -1,14 +1,11 @@
-import React, { createContext, useState } from 'react'
+import { createContext, useState } from 'react'
 
 const AuthContext = createContext()
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = props => {
   const [currentUser, setCurrentUser] = useState({})
-  return (
-    <AuthContext.Provider value={[currentUser, setCurrentUser]}>
-      {React.Children.only(children)}
-    </AuthContext.Provider>
-  )
+
+  return <AuthContext.Provider value={[currentUser, setCurrentUser]} {...props} />
 }
 
 export { AuthContext }

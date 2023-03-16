@@ -1,0 +1,14 @@
+.account {
+  padding: 2rem 20%;
+  width: max(40rem, 100%);
+
+  .user-page__title {
+    text-align: center;
+  }
+
+  .form.form__user-info {
+    .ant-picker {
+      width: 100%;
+    }
+  }
+}

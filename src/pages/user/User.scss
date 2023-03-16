@@ -3,9 +3,10 @@
   grid-template-columns: 2fr 10fr;
 
   &__menu {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     border-right: 1px solid var(--line-color);
 
     &__avatar {

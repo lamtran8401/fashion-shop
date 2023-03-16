@@ -39,22 +39,25 @@ const items = [
 
 const User = ({ gender = 'male', name = 'Customer Name' }) => {
   const currentUserMenuPath = useCurrentPath()
-  const userAvatar = useRef(gender === 'male' ? maleAvatar : femaleAvatar)
+  const avatar = useRef(gender === 'male' ? maleAvatar : femaleAvatar)
+
   return (
     <div className='user-page'>
       <section className='user-page__menu'>
         <div className='user-page__menu__avatar'>
-          <img src={userAvatar.current} alt='User avatar' loading='lazy' className='user__avatar' />
+          <img src={avatar.current} alt='User avatar' loading='lazy' className='user__avatar' />
           <Typography.Title level={4} className='user__name'>
             {name}
           </Typography.Title>
         </div>
-        <Menu
-          className='user-menu'
-          defaultSelectedKeys={[currentUserMenuPath]}
-          selectedKeys={[currentUserMenuPath]}
-          items={items}
-        />
+        <aside className='user-page__menu__divider'>
+          <Menu
+            className='user-menu'
+            defaultSelectedKeys={[currentUserMenuPath]}
+            selectedKeys={[currentUserMenuPath]}
+            items={items}
+          />
+        </aside>
       </section>
       <section className='user-page__content'>
         <Suspense fallback={<Loading />}>

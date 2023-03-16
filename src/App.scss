@@ -44,6 +44,12 @@ a {
   padding: 0 10rem;
 }
 
+@media screen and (width < 760px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
 .link {
   font-size: 1.4rem;
   color: var(--primary-color-light);

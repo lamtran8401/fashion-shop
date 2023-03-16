@@ -1,9 +1,12 @@
+import AddressPicker from '@/components/AddressPicker'
+import { Typography } from 'antd'
 import './Address.scss'
 
 const Address = () => {
   return (
     <div className='address'>
-      <h1>Address</h1>
+      <Typography.Title level={3}>Address</Typography.Title>
+      <AddressPicker />
     </div>
   )
 }
