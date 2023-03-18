@@ -12,32 +12,32 @@ import {
 import { Menu, Typography } from 'antd'
 import { Suspense, useRef } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import './User.scss'
+import './UserPage.scss'
 
 const items = [
   {
     key: '/user',
-    label: <Link to='/user'>Account</Link>,
+    label: <Link to='/user'>Tài khoản</Link>,
     icon: <IdentificationIcon className='icon' />,
   },
   {
     key: '/user/address',
-    label: <Link to='/user/address'>Address</Link>,
+    label: <Link to='/user/address'>Địa chỉ</Link>,
     icon: <MapIcon className='icon' />,
   },
   {
     key: '/user/order',
-    label: <Link to='/user/order'>Order</Link>,
+    label: <Link to='/user/order'>Đơn hàng</Link>,
     icon: <QueueListIcon className='icon' />,
   },
   {
     key: '/user/password',
-    label: <Link to='/user/password'>Password</Link>,
+    label: <Link to='/user/password'>Mật khẩu</Link>,
     icon: <LockClosedIcon className='icon' />,
   },
 ]
 
-const User = ({ gender = 'male', name = 'Customer Name' }) => {
+const UserPage = ({ gender = 'male', name = 'Customer Name' }) => {
   const currentUserMenuPath = useCurrentPath()
   const avatar = useRef(gender === 'male' ? maleAvatar : femaleAvatar)
 
@@ -68,4 +68,4 @@ const User = ({ gender = 'male', name = 'Customer Name' }) => {
   )
 }
 
-export default User
+export default UserPage

@@ -4,25 +4,25 @@ import { createBrowserRouter } from 'react-router-dom'
 // layouts
 const AuthLayout = lazy(() => import('@/layouts/AuthLayout'))
 // pages
-const Error = lazy(() => import('@/pages/error'))
-const Home = lazy(() => import('@/pages/home'))
-const User = lazy(() => import('@/pages/user'))
-const SignIn = lazy(() => import('@/pages/auth/signin'))
-const SignUp = lazy(() => import('@/pages/auth/signup'))
+const ErrorPage = lazy(() => import('@/pages/error'))
+const HomePage = lazy(() => import('@/pages/home'))
+const UserPage = lazy(() => import('@/pages/user'))
+const LoginPage = lazy(() => import('@/pages/auth/login'))
+const RegisterPage = lazy(() => import('@/pages/auth/register'))
 // children page
-const Account = lazy(() => import('@/pages/user/account'))
-const Address = lazy(() => import('@/pages/user/address'))
-const Order = lazy(() => import('@/pages/user/order'))
+const AccountPage = lazy(() => import('@/pages/user/account'))
+const AddressPage = lazy(() => import('@/pages/user/address'))
+const OrderPage = lazy(() => import('@/pages/user/order'))
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    errorElement: <Error />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '',
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: 'product',
@@ -30,19 +30,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'user',
-        element: <User />,
+        element: <UserPage />,
         children: [
           {
             path: '',
-            element: <Account />,
+            element: <AccountPage />,
           },
           {
             path: 'address',
-            element: <Address />,
+            element: <AddressPage />,
           },
           {
             path: 'order',
-            element: <Order />,
+            element: <OrderPage />,
           },
         ],
       },
@@ -51,21 +51,21 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <AuthLayout />,
-    errorElement: <Error />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: 'sign-in',
-        element: <SignIn />,
+        path: 'login',
+        element: <LoginPage />,
       },
       {
-        path: 'sign-up',
-        element: <SignUp />,
+        path: 'register',
+        element: <RegisterPage />,
       },
     ],
   },
   {
     path: '*',
-    element: <Error />,
+    element: <ErrorPage />,
   },
 ])
 

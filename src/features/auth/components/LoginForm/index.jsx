@@ -2,61 +2,58 @@ import { EyeIcon, EyeSlashIcon, LockClosedIcon, UserIcon } from '@heroicons/reac
 import { Button, Checkbox, Form, Input, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 
-const SignInForm = () => {
+const LoginForm = () => {
   const [form] = Form.useForm()
 
   return (
     <>
       <Typography.Title level={2} className='form__title'>
-        Sign in to your account
+        Đăng nhập vào tài khoản của bạn
       </Typography.Title>
       <Form form={form} layout='vertical' className='form sign-in-form'>
         <Form.Item
           name='email'
-          label='Email Address'
+          label='Email'
           className='form__item'
           required={false}
           rules={[
-            { required: true, message: 'Please input your Username!' },
+            { required: true, message: 'Vui lòng nhập email của bạn!' },
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'Email nhập vào không hợp lệ!',
             },
           ]}>
-          <Input
-            placeholder='Type your email address here...'
-            prefix={<UserIcon className='form__icon' />}
-          />
+          <Input placeholder='Nhập email của bạn...' prefix={<UserIcon className='form__icon' />} />
         </Form.Item>
         <Form.Item
           name='password'
-          label='Password'
+          label='Mật khẩu'
           className='form__item'
           required={false}
-          rules={[{ required: true, message: 'Please input your Password!' }]}>
+          rules={[{ required: true, message: 'Vui lòng nhập mật khẩu của bạn!' }]}>
           <Input.Password
             prefix={<LockClosedIcon className='form__icon' />}
             iconRender={visible => (visible ? <EyeIcon /> : <EyeSlashIcon />)}
-            placeholder='Type your password here...'
+            placeholder='Nhập mật khẩu của bạn...'
           />
         </Form.Item>
         <Form.Item className='form-other-action'>
-          <Checkbox className='form__remember'>Remember me</Checkbox>
+          <Checkbox className='form__remember'>Ghi nhớ tài khoản</Checkbox>
           <Link to='#' className='link'>
-            Forgot your password?
+            Quên mật khẩu?
           </Link>
         </Form.Item>
         <Form.Item className='form__item'>
           <Button className='form__btn' type='primary' htmlType='submit'>
-            Sign in
+            Đăng nhập
           </Button>
         </Form.Item>
       </Form>
       <div className='form-redirect'>
         <span>
-          Don't have an account?{' '}
-          <Link to='/auth/sign-up' className='link'>
-            Sign up now
+          Chưa có tài khoản?{' '}
+          <Link to='/auth/register' className='link'>
+            Đăng ký ngay
           </Link>
         </span>
       </div>
@@ -64,4 +61,4 @@ const SignInForm = () => {
   )
 }
 
-export default SignInForm
+export default LoginForm

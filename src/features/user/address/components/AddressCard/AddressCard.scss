@@ -1,0 +1,86 @@
+$primary-color: #5046e5;
+
+.address-card {
+  cursor: pointer;
+
+  &:where(.selected) {
+    background-color: rgba($primary-color, $alpha: 0.05);
+  }
+
+  &.ant-card.ant-card-bordered {
+    border-radius: 14px;
+  }
+
+  &.selected {
+    border: 1.5px solid var(--primary-color);
+  }
+
+  .ant-card-body {
+    padding: 2rem;
+    width: 100%;
+  }
+
+  &-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__content {
+    &__name {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+  }
+
+  &__action-info {
+    display: flex;
+    gap: 2rem;
+    > * {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .badge {
+      padding: 0 2rem;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      border-radius: 6px;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: currentColor;
+        opacity: 0.1;
+      }
+    }
+  }
+
+  .icon {
+    &.danger {
+      color: var(--text-color-light);
+      opacity: 0.8;
+    }
+    &:hover {
+      color: var(--primary-color);
+
+      &:not(.danger) {
+        rotate: 45deg;
+      }
+      &.danger {
+        color: var(--danger-color);
+        scale: 1.2;
+      }
+    }
+  }
+}

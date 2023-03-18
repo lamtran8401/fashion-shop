@@ -1,6 +1,10 @@
 .user-page {
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 1fr 4fr;
+
+  &__title {
+    text-align: center;
+  }
 
   &__menu {
     height: 100%;
@@ -30,7 +34,7 @@
   }
 
   &__content {
-    padding: 2rem;
+    padding: 3rem 0 3rem 3rem;
   }
 
   .user-menu {

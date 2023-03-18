@@ -52,14 +52,14 @@ const Header = () => {
           items={items}
         />
       </nav>
-      <Search placeholder='Search for any product...' />
+      <Search placeholder='Tìm kiếm sản phẩm...' />
       <div className='top-action'>
-        <Link to='/auth/sign-up' className='btn-action'>
-          Create Account
+        <Link to='/auth/register' className='btn-action'>
+          Tạo tài khoản
         </Link>
         <Divider type='vertical' />
-        <Link to='/auth/sign-in' className='btn-action'>
-          <Button type='primary'>Sign in</Button>
+        <Link to='/auth/login' className='btn-action'>
+          <Button type='primary'>Đăng nhập</Button>
         </Link>
         <Badge count={2} size='small'>
           <ShoppingBagIcon onClick={toggleOn} className='top-bag-icon' />
