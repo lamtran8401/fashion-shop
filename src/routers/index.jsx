@@ -1,12 +1,14 @@
-import MainLayout from '@/layouts/MainLayout'
+import MainLayout from '@/layouts/main'
+import UserPage from '@/pages/user'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+import ProtectedRoute from './ProtectedRoute'
 // layouts
-const AuthLayout = lazy(() => import('@/layouts/AuthLayout'))
+const AuthLayout = lazy(() => import('@/layouts/auth'))
 // pages
 const ErrorPage = lazy(() => import('@/pages/error'))
 const HomePage = lazy(() => import('@/pages/home'))
-const UserPage = lazy(() => import('@/pages/user'))
+// const UserPage = lazy(() => import('@/pages/user'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const RegisterPage = lazy(() => import('@/pages/auth/register'))
 // children page
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'user',
-        element: <UserPage />,
+        element: (
+          <ProtectedRoute role={['USER']}>
+            <UserPage />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: '',

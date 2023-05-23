@@ -1,11 +1,36 @@
 import { createContext, useState } from 'react'
 
-const AuthContext = createContext()
+const AuthContext = createContext(null)
 
 const AuthProvider = props => {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null)
 
-  return <AuthContext.Provider value={[currentUser, setCurrentUser]} {...props} />
+  const login = (user, token) => {
+    setCurrentUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('token', token)
+  }
+
+  const logout = () => {
+    setCurrentUser(null)
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+  }
+
+  const getCurrentUser = () => JSON.parse(localStorage.getItem('user'))
+
+  return (
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        setCurrentUser,
+        getCurrentUser,
+        login,
+        logout,
+      }}
+      {...props}
+    />
+  )
 }
 
 export { AuthContext }

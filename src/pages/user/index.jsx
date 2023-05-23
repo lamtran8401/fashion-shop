@@ -2,6 +2,7 @@ import femaleAvatar from '@/assets/images/user-female-avatar.png'
 import maleAvatar from '@/assets/images/user-male-avatar.png'
 
 import Loading from '@/components/Loading'
+import useAuth from '@/hooks/useAuth'
 import useCurrentPath from '@/hooks/useCurrentPath'
 import {
   IdentificationIcon,
@@ -10,7 +11,7 @@ import {
   QueueListIcon,
 } from '@heroicons/react/24/outline'
 import { Menu, Typography } from 'antd'
-import { Suspense, useRef } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import './UserPage.scss'
 
@@ -37,15 +38,21 @@ const items = [
   },
 ]
 
-const UserPage = ({ gender = 'male', name = 'Customer Name' }) => {
+const UserPage = () => {
+  const { currentUser } = useAuth()
+
+  const { id, name, email, phone, birthDate, gender, isEmailVerified } = currentUser
+  const [avatarUrl, setAvatarUrl] = useState(gender === 'MALE' ? maleAvatar : femaleAvatar)
   const currentUserMenuPath = useCurrentPath()
-  const avatar = useRef(gender === 'male' ? maleAvatar : femaleAvatar)
+  useEffect(() => {
+    setAvatarUrl(gender === 'MALE' ? maleAvatar : femaleAvatar)
+  }, [gender])
 
   return (
     <div className='user-page'>
       <section className='user-page__menu'>
         <div className='user-page__menu__avatar'>
-          <img src={avatar.current} alt='User avatar' loading='lazy' className='user__avatar' />
+          <img src={avatarUrl} alt='User avatar' loading='lazy' className='user__avatar' />
           <Typography.Title level={4} className='user__name'>
             {name}
           </Typography.Title>

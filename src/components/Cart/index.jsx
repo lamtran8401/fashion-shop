@@ -2,7 +2,7 @@ import emptyBagImg from '@/assets/images/empty-bag.jpeg'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Button, Drawer, Typography } from 'antd'
 import { memo, useCallback } from 'react'
-import { useCart } from '../../hooks'
+import { useCart } from '../../features/cart/hooks'
 import './Cart.scss'
 
 const FooterCart = memo(({ total, onCheckOut }) => {

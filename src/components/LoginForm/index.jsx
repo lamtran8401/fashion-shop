@@ -1,16 +1,40 @@
+import useAuth from '@/hooks/useAuth'
+import useNotify from '@/hooks/useNotify'
+import userService from '@/services/user.service'
 import { EyeIcon, EyeSlashIcon, LockClosedIcon, UserIcon } from '@heroicons/react/24/outline'
-import { Button, Checkbox, Form, Input, Typography } from 'antd'
-import { Link } from 'react-router-dom'
+import { Alert, Button, Checkbox, Form, Input, Typography } from 'antd'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
   const [form] = Form.useForm()
+  const { login } = useAuth()
+  const { notifySuccess } = useNotify()
+  const navigate = useNavigate()
+
+  const [loginError, setLoginError] = useState(null)
+
+  const onFinish = async values => {
+    try {
+      const { email, password } = values
+      const { accessToken, user } = await userService.login({ email, password })
+      login(user, accessToken)
+      navigate('/')
+      notifySuccess('Đăng nhập thành công!', 'Chào mừng bạn đến với Bloom Shop')
+    } catch (error) {
+      setLoginError(error.response.data.message)
+    }
+  }
 
   return (
     <>
       <Typography.Title level={2} className='form__title'>
         Đăng nhập vào tài khoản của bạn
       </Typography.Title>
-      <Form form={form} layout='vertical' className='form sign-in-form'>
+      <Form form={form} layout='vertical' className='form sign-in-form' onFinish={onFinish}>
+        {loginError && (
+          <Alert style={{ marginBottom: '2.4rem' }} message={loginError} type='error' showIcon />
+        )}
         <Form.Item
           name='email'
           label='Email'

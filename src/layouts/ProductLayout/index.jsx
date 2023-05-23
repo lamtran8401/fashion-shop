@@ -1,9 +1,9 @@
 import './ProductLayout.scss'
 
-import { Outlet } from 'react-router-dom'
-import BaseLayout from '../Shares/Base'
 import Product from '@/components/Product'
 import { Typography } from 'antd'
+import { Outlet } from 'react-router-dom'
+import BaseLayout from '../shared/base'
 
 const ProductLayout = () => {
   return (

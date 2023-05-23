@@ -32,23 +32,45 @@
 
   .top-nav {
     margin-left: 2rem;
-    width: auto;
+    margin-right: auto;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 20%;
 
     .ant-menu {
       height: 100%;
+      width: 100%;
       border-bottom: none;
 
       .ant-menu-item {
         display: flex;
         align-items: center;
+        justify-content: center;
         font-weight: 500;
+
+        &:hover {
+          color: var(--primary-color-light);
+        }
+
+        .ant-menu-title-content {
+          display: inline-block;
+          width: 100%;
+        }
       }
     }
   }
 
+  .header-search {
+    flex-basis: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .top-action {
-    margin-left: 2rem;
+    margin-left: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,21 +110,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      .top-user-icon {
-        width: 2.6rem;
-        height: 2.6rem;
-      }
     }
 
     .top-bag-icon,
     .top-user-icon {
-      color: var(--text-color-light);
       cursor: pointer;
       transition: all 0.2s ease-in-out;
-
-      &:hover {
-        color: var(--primary-color-light);
-      }
     }
   }
 }
