@@ -4,13 +4,11 @@ import useToggle from '@/hooks/useToggle'
 import addressService from '@/services/address.service'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { Button, Skeleton, Typography } from 'antd'
-import { useState } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import './AddressPage.scss'
 
 const AddressPage = () => {
   const [toggle, toggleOn, toggleOff] = useToggle()
-  const [isErrorQuery, setIsErrorQuery] = useState(false)
 
   const queryClient = useQueryClient()
 
