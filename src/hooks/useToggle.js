@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const useToggle = (initialState = false) => {
   const [isToggle, setToggle] = useState(initialState)
@@ -11,7 +11,7 @@ const useToggle = (initialState = false) => {
     setToggle(false)
   }, [])
 
-  return [isToggle, { toggleOn, toggleOff }]
+  return [isToggle, toggleOn, toggleOff]
 }
 
 export default useToggle

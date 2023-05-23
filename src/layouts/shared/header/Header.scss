@@ -1,0 +1,121 @@
+#header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 6.4rem;
+  box-shadow: var(--get-shadow);
+  display: flex;
+
+  .logo {
+    width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    &-img {
+      width: 100%;
+      object-fit: cover;
+      background-color: rgba($color: var(--primary-color), $alpha: 0.5);
+    }
+  }
+
+  .top-nav {
+    margin-left: 2rem;
+    margin-right: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 20%;
+
+    .ant-menu {
+      height: 100%;
+      width: 100%;
+      border-bottom: none;
+
+      .ant-menu-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+
+        &:hover {
+          color: var(--primary-color-light);
+        }
+
+        .ant-menu-title-content {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .header-search {
+    flex-basis: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top-action {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+
+    .btn-action {
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: var(--primary-color-light);
+      }
+    }
+
+    .ant-divider {
+      height: 2rem;
+      margin: 0 2rem;
+    }
+    a {
+      color: var(--text-color-light);
+    }
+
+    .ant-badge {
+      margin-left: 2rem;
+
+      .ant-badge-count {
+        background-color: var(--primary-color);
+      }
+
+      .top-bag-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    .top-user {
+      margin-left: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-bag-icon,
+    .top-user-icon {
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

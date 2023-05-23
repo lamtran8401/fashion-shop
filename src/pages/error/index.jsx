@@ -1,9 +1,9 @@
 import { ArrowSmallRightIcon } from '@heroicons/react/24/outline'
 import { Button, Typography } from 'antd'
 import { useRouteError } from 'react-router-dom'
-import './Error.scss'
+import './ErrorPage.scss'
 
-const Error = () => {
+const ErrorPage = () => {
   const error = useRouteError()
 
   const status = error?.status || 404
@@ -31,4 +31,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default ErrorPage

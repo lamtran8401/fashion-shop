@@ -1,27 +1,30 @@
+import MainLayout from '@/layouts/main'
+import UserPage from '@/pages/user'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+import ProtectedRoute from './ProtectedRoute'
 // layouts
-const MainLayout = lazy(() => import('@/layouts').then(module => ({ default: module.MainLayout })))
-const AuthLayout = lazy(() => import('@/layouts').then(module => ({ default: module.AuthLayout })))
+const AuthLayout = lazy(() => import('@/layouts/auth'))
 // pages
-const Error = lazy(() => import('@/pages/error'))
-const Home = lazy(() => import('@/pages/home'))
-const User = lazy(() => import('@/pages/user'))
-const SignIn = lazy(() => import('@/pages/auth/signin'))
-const SignUp = lazy(() => import('@/pages/auth/signup'))
+const ErrorPage = lazy(() => import('@/pages/error'))
+const HomePage = lazy(() => import('@/pages/home'))
+// const UserPage = lazy(() => import('@/pages/user'))
+const LoginPage = lazy(() => import('@/pages/auth/login'))
+const RegisterPage = lazy(() => import('@/pages/auth/register'))
 // children page
-const Account = lazy(() => import('@/pages/user/account'))
-const Address = lazy(() => import('@/pages/user/address'))
-const Order = lazy(() => import('@/pages/user/order'))
+const AccountPage = lazy(() => import('@/pages/user/account'))
+const AddressPage = lazy(() => import('@/pages/user/address'))
+const OrderPage = lazy(() => import('@/pages/user/order'))
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
-        element: <Home />,
+        path: '',
+        element: <HomePage />,
       },
       {
         path: 'product',
@@ -29,23 +32,23 @@ const router = createBrowserRouter([
       },
       {
         path: 'user',
-        element: <User />,
+        element: (
+          <ProtectedRoute role={['USER']}>
+            <UserPage />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: '',
-            element: <Account />,
-          },
-          {
-            path: 'account',
-            element: <Account />,
+            element: <AccountPage />,
           },
           {
             path: 'address',
-            element: <Address />,
+            element: <AddressPage />,
           },
           {
             path: 'order',
-            element: <Order />,
+            element: <OrderPage />,
           },
         ],
       },
@@ -54,20 +57,21 @@ const router = createBrowserRouter([
   {
     path: '/auth',
     element: <AuthLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: 'sign-in',
-        element: <SignIn />,
+        path: 'login',
+        element: <LoginPage />,
       },
       {
-        path: 'sign-up',
-        element: <SignUp />,
+        path: 'register',
+        element: <RegisterPage />,
       },
     ],
   },
   {
     path: '*',
-    element: <Error />,
+    element: <ErrorPage />,
   },
 ])
 

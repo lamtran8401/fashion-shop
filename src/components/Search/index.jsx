@@ -1,4 +1,4 @@
-import { useDebounce } from '@/hooks'
+import useDebounce from '@/hooks/useDebounce'
 import { Input } from 'antd'
 import { memo, useEffect, useState } from 'react'
 import './Search.scss'

@@ -1,6 +1,6 @@
-import './Order.scss'
+import './OrderPage.scss'
 
-const Order = () => {
+const OrderPage = () => {
   return (
     <div className='order'>
       <h1>Order</h1>
@@ -8,4 +8,4 @@ const Order = () => {
   )
 }
 
-export default Order
+export default OrderPage

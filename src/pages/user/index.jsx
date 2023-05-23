@@ -1,7 +1,9 @@
 import femaleAvatar from '@/assets/images/user-female-avatar.png'
 import maleAvatar from '@/assets/images/user-male-avatar.png'
-import { Loading } from '@/components'
-import { useCurrentPath } from '@/hooks'
+
+import Loading from '@/components/Loading'
+import useAuth from '@/hooks/useAuth'
+import useCurrentPath from '@/hooks/useCurrentPath'
 import {
   IdentificationIcon,
   LockClosedIcon,
@@ -9,51 +11,60 @@ import {
   QueueListIcon,
 } from '@heroicons/react/24/outline'
 import { Menu, Typography } from 'antd'
-import { Suspense, useRef } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import './User.scss'
+import './UserPage.scss'
 
 const items = [
   {
     key: '/user',
-    label: <Link to='/user'>Account</Link>,
+    label: <Link to='/user'>Tài khoản</Link>,
     icon: <IdentificationIcon className='icon' />,
   },
   {
     key: '/user/address',
-    label: <Link to='/user/address'>Address</Link>,
+    label: <Link to='/user/address'>Địa chỉ</Link>,
     icon: <MapIcon className='icon' />,
   },
   {
     key: '/user/order',
-    label: <Link to='/user/order'>Order</Link>,
+    label: <Link to='/user/order'>Đơn hàng</Link>,
     icon: <QueueListIcon className='icon' />,
   },
   {
     key: '/user/password',
-    label: <Link to='/user/password'>Password</Link>,
+    label: <Link to='/user/password'>Mật khẩu</Link>,
     icon: <LockClosedIcon className='icon' />,
   },
 ]
 
-const User = ({ gender = 'male', name = 'Customer Name' }) => {
+const UserPage = () => {
+  const { currentUser } = useAuth()
+
+  const { id, name, email, phone, birthDate, gender, isEmailVerified } = currentUser
+  const [avatarUrl, setAvatarUrl] = useState(gender === 'MALE' ? maleAvatar : femaleAvatar)
   const currentUserMenuPath = useCurrentPath()
-  const userAvatar = useRef(gender === 'male' ? maleAvatar : femaleAvatar)
+  useEffect(() => {
+    setAvatarUrl(gender === 'MALE' ? maleAvatar : femaleAvatar)
+  }, [gender])
+
   return (
     <div className='user-page'>
       <section className='user-page__menu'>
         <div className='user-page__menu__avatar'>
-          <img src={userAvatar.current} alt='User avatar' loading='lazy' className='user__avatar' />
+          <img src={avatarUrl} alt='User avatar' loading='lazy' className='user__avatar' />
           <Typography.Title level={4} className='user__name'>
             {name}
           </Typography.Title>
         </div>
-        <Menu
-          className='user-menu'
-          defaultSelectedKeys={[currentUserMenuPath]}
-          selectedKeys={[currentUserMenuPath]}
-          items={items}
-        />
+        <aside className='user-page__menu__divider'>
+          <Menu
+            className='user-menu'
+            defaultSelectedKeys={[currentUserMenuPath]}
+            selectedKeys={[currentUserMenuPath]}
+            items={items}
+          />
+        </aside>
       </section>
       <section className='user-page__content'>
         <Suspense fallback={<Loading />}>
@@ -64,8 +75,4 @@ const User = ({ gender = 'male', name = 'Customer Name' }) => {
   )
 }
 
-export { default as Account } from './account'
-export { default as Address } from './address'
-export { default as Order } from './order'
-
-export default User
+export default UserPage

@@ -6,7 +6,6 @@
   --primary-color-light: #5e53f0;
   --danger-color: #dc2625;
   --danger-color-dark: #b91c1b;
-  --line-color: #e5e7eb;
   --text-color: #374151;
   --text-color-light: #6b7280;
   --text-color-lighter: #9ca3af;
@@ -41,8 +40,26 @@ a {
   text-decoration: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .container {
   padding: 0 10rem;
+}
+
+@media screen and (width < 760px) {
+  .container {
+    padding: 0 2rem;
+  }
 }
 
 .link {
