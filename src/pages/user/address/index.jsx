@@ -18,7 +18,8 @@ const AddressPage = () => {
   })
 
   if (isLoading) return <Skeleton active />
-  if (isError) return <div>{error}</div>
+
+  if (isError) return <div>{error.message}</div>
 
   const handleCreateAddress = async values => {
     await addressService.createAddress(values)
