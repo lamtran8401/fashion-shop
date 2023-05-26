@@ -28,7 +28,7 @@ const items = [
 
 const Header = () => {
   const currentMenuPath = useCurrentPath()
-  const { toggleOn } = useCart()
+  const { toggleOn, products } = useCart()
   const { currentUser, getCurrentUser, logout } = useAuth()
   const navigate = useNavigate()
   const handleLogout = e => {
@@ -83,7 +83,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Badge count={2} size='small'>
+            <Badge count={products.length} size='small'>
               <ShoppingBagIcon onClick={toggleOn} className='top-bag-icon' />
             </Badge>
             <Dropdown items={dropdownItems}>

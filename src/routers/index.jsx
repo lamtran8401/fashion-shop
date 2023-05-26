@@ -1,5 +1,6 @@
 import MainLayout from '@/layouts/main'
 import UserPage from '@/pages/user'
+import { productService } from '@/services/product.service'
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
@@ -8,13 +9,14 @@ const AuthLayout = lazy(() => import('@/layouts/auth'))
 // pages
 const ErrorPage = lazy(() => import('@/pages/error'))
 const HomePage = lazy(() => import('@/pages/home'))
-// const UserPage = lazy(() => import('@/pages/user'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const RegisterPage = lazy(() => import('@/pages/auth/register'))
 // children page
 const AccountPage = lazy(() => import('@/pages/user/account'))
 const AddressPage = lazy(() => import('@/pages/user/address'))
 const OrderPage = lazy(() => import('@/pages/user/order'))
+const ProductPage = lazy(() => import('@/pages/product'))
+const ProductDetailPage = lazy(() => import('@/pages/product/detail'))
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'product',
-        element: <div>product</div>,
+        element: <ProductPage />,
+      },
+      {
+        path: 'product/:productId',
+        element: <ProductDetailPage />,
+        loader: ({ params }) => productService.getDetail(params.productId),
       },
       {
         path: 'user',
