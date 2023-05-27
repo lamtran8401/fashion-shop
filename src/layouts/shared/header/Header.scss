@@ -1,6 +1,6 @@
 #header {
   backdrop-filter: blur(1rem);
-  background-color: rgba($color: #fff, $alpha: 0.5);
+  background-color: rgba($color: #fff, $alpha: 0.8);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -125,6 +125,13 @@
 
     .top-user-icon ~ span {
       color: var(--text-color);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .dropdown-trigger:hover {
+      .top-user-icon ~ span {
+        color: var(--primary-color-light);
+      }
     }
   }
 }

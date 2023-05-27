@@ -1,12 +1,19 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { Carousel } from 'antd'
-import { useRef } from 'react'
+import useCart from '@/features/cart/hooks/useCart'
+import useNotify from '@/hooks/useNotify'
+import toCurrency from '@/utils/currency'
+import { ChevronLeftIcon, ChevronRightIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
+import { Button, Carousel, InputNumber, Segmented, Typography } from 'antd'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import './ProductDetailPage.scss'
 
 const ProductDetailPage = () => {
-  const { images, name, description, price, productDetails, soldOut, brand, category } =
+  const { id, images, name, description, price, productDetails, soldOut, brand, category } =
     useLoaderData()
+
+  const { notifySuccess, notifyError } = useNotify()
+
+  const { action } = useCart()
 
   const carouselRef = useRef()
 
@@ -16,6 +23,89 @@ const ProductDetailPage = () => {
   const handleNextImg = () => {
     carouselRef.current.next()
   }
+
+  const colorOptions = useMemo(() => productDetails.map(productDetail => productDetail.color), [])
+
+  const sizeOptions = useMemo(() => {
+    const options = productDetails.map(productDetail => productDetail.size)
+    return [...new Set(options)]
+  }, [])
+
+  const [colorSelected, setColorSelected] = useState(colorOptions[0] || '')
+  const [stockSize, setStockSize] = useState(10)
+
+  const sizeOptionsByColor = useMemo(() => {
+    const options = productDetails
+      .filter(productDetail => productDetail.color === colorSelected)
+      .map(productDetail => ({
+        size: productDetail.size,
+        stock: productDetail.stock,
+      }))
+
+    return sizeOptions.map(size => {
+      if (options.find(option => option.size === size)) return size
+
+      return {
+        label: size,
+        value: size,
+        disabled: true,
+      }
+    })
+  }, [colorSelected])
+
+  const [sizeSelected, setSizeSelected] = useState('')
+  const [quantitySelected, setQuantitySelected] = useState(1)
+
+  useEffect(() => {
+    const productDetail = productDetails.find(
+      productDetail => productDetail.color === colorSelected && productDetail.size === sizeSelected
+    )
+
+    if (productDetail) {
+      setStockSize(productDetail.stock)
+      setQuantitySelected(1)
+    }
+  }, [sizeSelected])
+
+  const handleAddToCart = () => {
+    if (!colorSelected || !sizeSelected) {
+      notifyError('Vui lòng chọn màu sắc và kích thước')
+      return
+    }
+
+    const productDetail = productDetails.find(
+      productDetail => productDetail.color === colorSelected && productDetail.size === sizeSelected
+    )
+
+    if (!productDetail) {
+      notifyError('Không tìm thấy sản phẩm')
+      return
+    }
+
+    if (quantitySelected <= 0) {
+      notifyError('Số lượng sản phẩm không hợp lệ')
+      return
+    }
+
+    if (productDetail.stock < quantitySelected) {
+      notifyError('Số lượng sản phẩm không đủ')
+      return
+    }
+
+    action.addItem({
+      id,
+      name,
+      price,
+      detailId: productDetail.id,
+      images,
+      color: colorSelected,
+      size: sizeSelected,
+      quantity: quantitySelected,
+    })
+    notifySuccess('Thêm vào giỏ hàng thành công')
+  }
+
+  const handleBuyNow = () => {}
 
   return (
     <div className='product-detail-page'>
@@ -35,10 +125,93 @@ const ProductDetailPage = () => {
         </div>
       </div>
       <div className='product-detail-page__content'>
-        <h1 className='product-detail-page__content__name'>{name}</h1>
-        <p className='product-detail-page__content__description'>{description}</p>
-        <p className='product-detail-page__content__price'>${price}</p>
-        <p className='product-detail-page__content__sold-out'>{soldOut}</p>
+        <Typography.Title level={2} className='product-detail-page__content__name'>
+          {name}
+        </Typography.Title>
+        <Typography.Paragraph className='product-detail-page__content__description'>
+          {description}
+        </Typography.Paragraph>
+        <div className='product-detail__options'>
+          <div className='product-detail__options__item'>
+            <Typography.Text className='product-detail__options__item__title'>
+              Thương hiệu:
+            </Typography.Text>
+            <Typography.Text className='product-detail__options__item__value'>
+              {brand}
+            </Typography.Text>
+          </div>
+          <div className='product-detail__options__item'>
+            <Typography.Text className='product-detail__options__item__title'>
+              Danh mục:
+            </Typography.Text>
+            <Typography.Text className='product-detail__options__item__value'>
+              {category}
+            </Typography.Text>
+          </div>
+          <div className='product-detail__options__item product-color'>
+            <Typography.Text className='product-detail__options__item__title'>
+              Màu sắc:
+            </Typography.Text>
+            <Typography.Text className='product-detail__options__item__value'>
+              <Segmented
+                className='product-detail__options__item__value__segmented'
+                options={colorOptions}
+                value={colorSelected}
+                onChange={value => {
+                  setColorSelected(value)
+                  setSizeSelected('')
+                }}
+              />
+            </Typography.Text>
+          </div>
+          <div className='product-detail__options__item product-size'>
+            <Typography.Text className='product-detail__options__item__title'>
+              Kích thước:
+            </Typography.Text>
+            <Typography.Text className='product-detail__options__item__value'>
+              <Segmented
+                className='product-detail__options__item__value__segmented'
+                options={sizeOptionsByColor}
+                value={sizeSelected}
+                onChange={setSizeSelected}
+              />
+            </Typography.Text>
+          </div>
+          <div className='product-detail__options__item product-quantity'>
+            <Typography.Text className='product-detail__options__item__title'>
+              Số lượng:
+            </Typography.Text>
+            <Typography.Text className='product-detail__options__item__value'>
+              <InputNumber
+                min={1}
+                max={stockSize}
+                value={quantitySelected}
+                onChange={setQuantitySelected}
+                className='product-detail__options__item__value__input'
+              />
+            </Typography.Text>
+          </div>
+        </div>
+        <Typography.Paragraph className='product-detail-page__content__price'>
+          {toCurrency(price)}
+        </Typography.Paragraph>
+        <div className='product-detail-page__content__btn'>
+          <Button
+            size='large'
+            className='product-detail-page__content__btn-add-to-cart'
+            onClick={handleAddToCart}>
+            <ShoppingBagIcon className='icon' />
+            Thêm vào giỏ hàng
+          </Button>
+          <Button
+            size='large'
+            className='product-detail-page__content__btn-buy'
+            type='primary'
+            onClick={handleBuyNow}>
+            Mua ngay
+          </Button>
+        </div>
+        <p className='product-detail-page__content__sold-out'>Đã bán: {soldOut}</p>
       </div>
     </div>
   )

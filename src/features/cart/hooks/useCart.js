@@ -1,26 +1,10 @@
-import useCartContext from './useCartContext'
-import useCartProducts from './useCartProducts'
-import useCartTotal from './useCartTotal'
+import { useContext } from 'react'
+import { CartContext } from '../context/CartContext'
 
 const useCart = () => {
-  const { openCart, toggleOn, toggleOff } = useCartContext()
-  const { products, addProduct, removeProduct, increaseProductQuantity, decreaseProductQuantity } =
-    useCartProducts()
-
-  const { total, updateCartTotal } = useCartTotal()
-
-  return {
-    openCart,
-    toggleOn,
-    toggleOff,
-    products,
-    addProduct,
-    removeProduct,
-    increaseProductQuantity,
-    decreaseProductQuantity,
-    total,
-    updateCartTotal,
-  }
+  const cart = useContext(CartContext)
+  if (!cart) throw new Error('useCart must be used within an CartProvider')
+  return cart
 }
 
 export default useCart

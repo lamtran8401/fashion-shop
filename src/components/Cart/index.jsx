@@ -1,8 +1,10 @@
 import emptyBagImg from '@/assets/images/empty-bag.jpeg'
+import useCart from '@/features/cart/hooks/useCart'
+import toCurrency from '@/utils/currency'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Button, Drawer, Typography } from 'antd'
 import { memo, useCallback } from 'react'
-import { useCart } from '../../features/cart/hooks'
+import CartItemList from '../CartItemList'
 import './Cart.scss'
 
 const FooterCart = memo(({ total, onCheckOut }) => {
@@ -12,7 +14,7 @@ const FooterCart = memo(({ total, onCheckOut }) => {
         <div className='cart__footer-total-wrapper'>
           <Typography.Text className='cart__footer-total__title'>Tổng cộng</Typography.Text>
           <Typography.Text className='cart__footer-total__price'>
-            ${total.totalPrice}
+            {toCurrency(total)}
           </Typography.Text>
         </div>
         <Typography.Paragraph className='cart__footer-total__text'>
@@ -27,7 +29,7 @@ const FooterCart = memo(({ total, onCheckOut }) => {
 })
 
 const Cart = ({ title = 'Giỏ hàng' }) => {
-  const { openCart, toggleOff, products, total } = useCart()
+  const { cart, toggle } = useCart()
 
   const handleCheckout = useCallback(() => {
     console.log('checkout')
@@ -36,19 +38,26 @@ const Cart = ({ title = 'Giỏ hàng' }) => {
   return (
     <Drawer
       className='cart'
-      width={460}
+      width={500}
       title={title}
       closeIcon={<XMarkIcon className='cart__close-icon' />}
-      headerStyle={{ borderBottom: 'none' }}
-      footer={<FooterCart total={total} onCheckOut={handleCheckout} />}
+      footer={<FooterCart total={cart.total} onCheckOut={handleCheckout} />}
       footerStyle={{ padding: '16px 24px' }}
-      open={openCart}
-      onClose={toggleOff}>
-      <div className='cart__empty'>
-        <p className='cart__empty-text'>Giỏ hàng của bạn trống</p>
-        <img className='cart__empty-img' src={emptyBagImg} alt='Empty cart image' loading='lazy' />
-      </div>
-      {/* <BagItem item={{ name: 'P1', price: '200', quantity: '2' }} /> */}
+      open={toggle.isOpenCart}
+      onClose={toggle.toggleOff}>
+      {cart.totalQuantity > 0 ? (
+        <CartItemList data={cart.items} />
+      ) : (
+        <div className='cart__empty'>
+          <p className='cart__empty-text'>Giỏ hàng của bạn trống</p>
+          <img
+            className='cart__empty-img'
+            src={emptyBagImg}
+            alt='Empty cart image'
+            loading='lazy'
+          />
+        </div>
+      )}
     </Drawer>
   )
 }

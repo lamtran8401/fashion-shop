@@ -1,7 +1,7 @@
 import logo from '@/assets/logo-header.png'
 import Dropdown from '@/components/Dropdown'
 import Search from '@/components/Search'
-import { useCart } from '@/features/cart/hooks'
+import useCart from '@/features/cart/hooks/useCart'
 import useAuth from '@/hooks/useAuth'
 import useCurrentPath from '@/hooks/useCurrentPath'
 import userService from '@/services/user.service'
@@ -28,7 +28,7 @@ const items = [
 
 const Header = () => {
   const currentMenuPath = useCurrentPath()
-  const { toggleOn, products } = useCart()
+  const { cart, toggle } = useCart()
   const { currentUser, getCurrentUser, logout } = useAuth()
   const navigate = useNavigate()
   const handleLogout = e => {
@@ -83,8 +83,8 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Badge count={products.length} size='small'>
-              <ShoppingBagIcon onClick={toggleOn} className='top-bag-icon' />
+            <Badge count={cart.totalQuantity} size='small'>
+              <ShoppingBagIcon onClick={toggle.toggleOn} className='top-bag-icon' />
             </Badge>
             <Dropdown items={dropdownItems}>
               <>

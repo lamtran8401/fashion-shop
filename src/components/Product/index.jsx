@@ -1,4 +1,4 @@
-import { useCart } from '@/features/cart/hooks'
+import useCart from '@/features/cart/hooks/useCart'
 import toCurrency from '@/utils/currency'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { Button } from 'antd'
@@ -6,16 +6,25 @@ import { Link } from 'react-router-dom'
 import './Product.scss'
 
 const Product = ({ data }) => {
-  const { id, images, name, price } = data
+  const { id, images, name, price, productDetails } = data
 
-  const { addProduct } = useCart()
+  const { action } = useCart()
 
   const handleBuy = () => {
     console.log('buy')
   }
 
   const handleAddToCart = () => {
-    addProduct(data)
+    action.addItem({
+      id,
+      name,
+      images,
+      price,
+      detailId: productDetails[0].id,
+      color: productDetails[0].color,
+      size: productDetails[0].size,
+      quantity: 1,
+    })
   }
   return (
     <div className='product'>

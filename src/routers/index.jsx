@@ -1,4 +1,5 @@
 import MainLayout from '@/layouts/main'
+import ProductDetailPage from '@/pages/product/detail'
 import UserPage from '@/pages/user'
 import { productService } from '@/services/product.service'
 import { lazy } from 'react'
@@ -16,7 +17,6 @@ const AccountPage = lazy(() => import('@/pages/user/account'))
 const AddressPage = lazy(() => import('@/pages/user/address'))
 const OrderPage = lazy(() => import('@/pages/user/order'))
 const ProductPage = lazy(() => import('@/pages/product'))
-const ProductDetailPage = lazy(() => import('@/pages/product/detail'))
 
 const router = createBrowserRouter([
   {
