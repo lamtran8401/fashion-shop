@@ -136,7 +136,6 @@ const ProductDetailPage = () => {
       size: sizeSelected,
       price,
       quantity: quantitySelected,
-      size: sizeSelected,
       detailId,
     }
 
