@@ -1,3 +1,4 @@
+import addressService from '@/services/address.service'
 import addressData from '../data/address/index.json'
 
 const addressSrc = JSON.parse(JSON.stringify(addressData))
@@ -9,5 +10,19 @@ const getAddress = address => {
 
   return `${address.detail}, ${ward.label}, ${district.label}, ${province.label}`
 }
+
+const getUserAddress = async () => {
+  const addresses = await addressService.getAddress()
+  if (!addresses) return []
+  return addresses
+}
+
+const getDefaultAddress = async () => {
+  const addresses = await getUserAddress()
+  if (!addresses) return null
+  return addresses.find(item => item.default)
+}
+
+export { getDefaultAddress, getUserAddress }
 
 export default getAddress

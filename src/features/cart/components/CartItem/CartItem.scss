@@ -24,6 +24,10 @@
       font-size: 1.5rem;
       font-weight: 500;
       color: var(--text-grey-dark);
+
+      > a {
+        color: var(--text-grey-dark);
+      }
     }
 
     &__price {

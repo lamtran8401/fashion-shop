@@ -3,6 +3,7 @@ import toCurrency from '@/utils/currency'
 import { MinusSmallIcon, PlusSmallIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { Button, Popconfirm, Tag, Typography } from 'antd'
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 import './CartItem.scss'
 
 const CartItem = ({ item }) => {
@@ -29,7 +30,9 @@ const CartItem = ({ item }) => {
     <div className='cart-item'>
       <img className='cart-item__img' src={item?.images[0]} alt={item.name} />
       <div className='cart-item__info'>
-        <p className='cart-item__info__name'>{item.name}</p>
+        <p className='cart-item__info__name'>
+          <Link to={`/product/${item.id}`}>{item.name}</Link>
+        </p>
         <div className='cart-item__info__options'>
           <Tag className='cart-item__info__color' color='purple'>
             {item.color}

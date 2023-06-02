@@ -1,0 +1,22 @@
+.change-address-item {
+  padding: 1.5rem;
+  border: 1px solid rgba(#5046e5, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(#5046e5, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(#5046e5, 0.1);
+  }
+
+  &.selected {
+    border-color: #5046e5;
+    background-color: rgba(#5046e5, 0.1);
+  }
+
+  &__name {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}

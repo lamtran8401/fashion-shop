@@ -1,7 +1,7 @@
 import useToggle from '@/hooks/useToggle'
 import { createContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, removeFromCart, updateQuantity } from '../cartSlice'
+import { addToCart, removeFromCart, updateQuantity } from '../reducer/cartSlice'
 
 const CartContext = createContext({})
 

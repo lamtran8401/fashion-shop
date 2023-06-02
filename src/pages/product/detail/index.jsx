@@ -1,10 +1,12 @@
 import useCart from '@/features/cart/hooks/useCart'
+import useCheckOut from '@/features/checkout/hooks/useCheckout'
 import useNotify from '@/hooks/useNotify'
+import getAddress, { getDefaultAddress } from '@/utils/address'
 import toCurrency from '@/utils/currency'
 import { ChevronLeftIcon, ChevronRightIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { Button, Carousel, InputNumber, Segmented, Typography } from 'antd'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
 import './ProductDetailPage.scss'
 
 const ProductDetailPage = () => {
@@ -15,7 +17,11 @@ const ProductDetailPage = () => {
 
   const { action } = useCart()
 
+  const { createCheckout } = useCheckOut()
+
   const carouselRef = useRef()
+
+  const navigate = useNavigate()
 
   const handlePrevImg = () => {
     carouselRef.current.prev()
@@ -33,6 +39,8 @@ const ProductDetailPage = () => {
 
   const [colorSelected, setColorSelected] = useState(colorOptions[0] || '')
   const [stockSize, setStockSize] = useState(10)
+  const [detailId, setDetailId] = useState(productDetails[0].id)
+  const [detailPrice, setDetailPrice] = useState(productDetails[0].price)
 
   const sizeOptionsByColor = useMemo(() => {
     const options = productDetails
@@ -64,6 +72,8 @@ const ProductDetailPage = () => {
     if (productDetail) {
       setStockSize(productDetail.stock)
       setQuantitySelected(1)
+      setDetailId(productDetail.id)
+      setDetailPrice(productDetail.price)
     }
   }, [sizeSelected])
 
@@ -105,14 +115,55 @@ const ProductDetailPage = () => {
     notifySuccess('Thêm vào giỏ hàng thành công')
   }
 
-  const handleBuyNow = () => {}
+  const handleBuyNow = async () => {
+    if (!colorSelected || !sizeSelected) {
+      notifyError('Lỗi mua hàng', 'Vui lòng chọn màu sắc và kích thước')
+      return
+    }
+
+    const checkoutData = {
+      items: [],
+      total: quantitySelected * detailPrice,
+      totalQuantity: quantitySelected,
+      recipient: null,
+    }
+
+    const item = {
+      id,
+      name,
+      images,
+      color: colorSelected,
+      size: sizeSelected,
+      price,
+      quantity: quantitySelected,
+      size: sizeSelected,
+      detailId,
+    }
+
+    checkoutData.items.push(item)
+
+    const addressDefault = await getDefaultAddress()
+    if (addressDefault) {
+      const { detail, ward, district, province, receiver, phone, id } = addressDefault
+      const fullAddress = getAddress({ detail, ward, district, province })
+      const recipient = {
+        name: receiver,
+        phone: phone,
+        address: fullAddress,
+        addressId: id,
+      }
+      checkoutData.recipient = recipient
+    }
+    createCheckout(checkoutData)
+    navigate('/checkout')
+  }
 
   return (
     <div className='product-detail-page'>
       <div className='carousel-wrapper'>
         <Carousel ref={carouselRef} autoplay className='carousel' effect='fade'>
           {images.map((image, index) => (
-            <div key={index}>
+            <div key={index} className='carousel-item'>
               <img className='carousel-img' src={image} alt={name} />
             </div>
           ))}
@@ -193,7 +244,7 @@ const ProductDetailPage = () => {
           </div>
         </div>
         <Typography.Paragraph className='product-detail-page__content__price'>
-          {toCurrency(price)}
+          {toCurrency(detailPrice)}
         </Typography.Paragraph>
         <div className='product-detail-page__content__btn'>
           <Button

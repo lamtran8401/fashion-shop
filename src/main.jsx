@@ -10,6 +10,7 @@ import { store } from './config/store'
 import AuthProvider from './context/AuthContext'
 import NotifyProvider from './context/NotifyContext'
 import CartProvider from './features/cart/context/CartContext'
+import CheckOutProvider from './features/checkout/context/CheckOutContext'
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -21,9 +22,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Suspense fallback={<Loading />}>
             <NotifyProvider>
               <CartProvider>
-                <QueryClientProvider client={queryClient}>
-                  <App />
-                </QueryClientProvider>
+                <CheckOutProvider>
+                  <QueryClientProvider client={queryClient}>
+                    <App />
+                  </QueryClientProvider>
+                </CheckOutProvider>
               </CartProvider>
             </NotifyProvider>
           </Suspense>

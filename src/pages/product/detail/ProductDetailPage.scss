@@ -1,6 +1,7 @@
 .product-detail-page {
   margin-top: 2rem;
   display: flex;
+  align-items: center;
   gap: 3rem;
 
   .product-detail-page__content {
@@ -17,6 +18,10 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+
+    &-item {
+      display: flex;
+    }
 
     &-img {
       line-height: 0;

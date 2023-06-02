@@ -12,11 +12,12 @@ const ErrorPage = lazy(() => import('@/pages/error'))
 const HomePage = lazy(() => import('@/pages/home'))
 const LoginPage = lazy(() => import('@/pages/auth/login'))
 const RegisterPage = lazy(() => import('@/pages/auth/register'))
+const ProductPage = lazy(() => import('@/pages/product'))
+const CheckOutPage = lazy(() => import('@/pages/checkout'))
 // children page
 const AccountPage = lazy(() => import('@/pages/user/account'))
 const AddressPage = lazy(() => import('@/pages/user/address'))
 const OrderPage = lazy(() => import('@/pages/user/order'))
-const ProductPage = lazy(() => import('@/pages/product'))
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         path: 'product/:productId',
         element: <ProductDetailPage />,
         loader: ({ params }) => productService.getDetail(params.productId),
+      },
+      {
+        path: 'checkout',
+        element: <CheckOutPage />,
       },
       {
         path: 'user',

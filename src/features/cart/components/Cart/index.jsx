@@ -1,9 +1,13 @@
 import emptyBagImg from '@/assets/images/empty-bag.jpeg'
 import useCart from '@/features/cart/hooks/useCart'
+import useCheckOut from '@/features/checkout/hooks/useCheckout'
+import useNotify from '@/hooks/useNotify'
+import getAddress, { getDefaultAddress } from '@/utils/address'
 import toCurrency from '@/utils/currency'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Button, Drawer, Typography } from 'antd'
 import { memo, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import CartItemList from '../CartItemList'
 import './Cart.scss'
 
@@ -29,10 +33,37 @@ const FooterCart = memo(({ total, onCheckOut }) => {
 })
 
 const Cart = ({ title = 'Giỏ hàng' }) => {
+  const { notifyInfo } = useNotify()
   const { cart, toggle } = useCart()
+  const navigate = useNavigate()
+  const { createCheckout } = useCheckOut()
 
-  const handleCheckout = useCallback(() => {
-    console.log('checkout')
+  const handleCheckout = useCallback(async () => {
+    if (cart.totalQuantity <= 0)
+      return notifyInfo('Giỏ hàng của bạn trống', 'Vui lòng thêm sản phẩm vào giỏ hàng')
+
+    const checkoutData = {
+      items: cart.items,
+      total: cart.total,
+      totalQuantity: cart.totalQuantity,
+      recipient: null,
+      fromCart: true,
+    }
+    const addressDefault = await getDefaultAddress()
+    if (addressDefault) {
+      const { detail, ward, district, province, receiver, phone, id } = addressDefault
+      const fullAddress = getAddress({ detail, ward, district, province })
+      const recipient = {
+        name: receiver,
+        phone: phone,
+        address: fullAddress,
+        addressId: id,
+      }
+      checkoutData.recipient = recipient
+    }
+    createCheckout(checkoutData)
+    toggle.toggleOff()
+    navigate('/checkout')
   })
 
   return (

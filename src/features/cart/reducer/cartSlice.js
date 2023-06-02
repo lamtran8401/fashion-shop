@@ -41,8 +41,8 @@ const cartSlice = createSlice({
       const { id, detailId, quantity } = action.payload
       const existedItem = state.items.find(item => item.id === id && item.detailId === detailId)
       if (existedItem) {
-        existedItem.quantity = quantity
         state.totalQuantity += quantity - existedItem.quantity
+        existedItem.quantity = quantity
       }
       updateTotal(state)
       localStorage.setItem('cart', JSON.stringify(state))
