@@ -1,0 +1,39 @@
+.order-item-list__item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  &__image {
+    border-radius: 8px;
+    width: 8rem;
+    height: 8rem;
+
+    > img {
+      border-radius: 8px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+
+    &__name {
+      font-size: 1.5rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__price {
+    margin-left: auto;
+    font-size: 1.6rem;
+  }
+}

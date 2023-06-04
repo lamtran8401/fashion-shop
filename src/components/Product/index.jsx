@@ -56,7 +56,7 @@ const Product = ({ data }) => {
       id,
       name,
       images,
-      price,
+      price: productDetails[0].price,
       detailId: productDetails[0].id,
       color: productDetails[0].color,
       size: productDetails[0].size,

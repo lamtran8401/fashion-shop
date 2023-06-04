@@ -19,12 +19,18 @@ const AuthProvider = props => {
 
   const getCurrentUser = () => JSON.parse(localStorage.getItem('user'))
 
+  const updateCurrentUser = user => {
+    setCurrentUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
   return (
     <AuthContext.Provider
       value={{
         currentUser,
         setCurrentUser,
         getCurrentUser,
+        updateCurrentUser,
         login,
         logout,
       }}

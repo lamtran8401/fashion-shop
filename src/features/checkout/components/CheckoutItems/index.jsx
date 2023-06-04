@@ -10,7 +10,7 @@ const CheckoutItems = ({ items }) => {
       </div>
       <ul className='checkout__info__items__list'>
         {items.map(item => (
-          <li className='checkout-item' key={item.id}>
+          <li className='checkout-item' key={item.detailId}>
             <div className='checkout-item__img'>
               <img src={item.images[0]} alt={item.name} />
             </div>

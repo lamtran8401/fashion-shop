@@ -1,7 +1,7 @@
 import CheckoutAddressInfo from '@/features/checkout/components/CheckoutAddressInfo'
 import CheckoutItems from '@/features/checkout/components/CheckoutItems'
 import CheckoutTotal from '@/features/checkout/components/CheckoutTotal'
-import useCheckOut from '@/features/checkout/hooks/useCheckout'
+import useCheckOut from '@/features/checkout/hooks/useCheckOut'
 import './CheckOutPage.scss'
 
 const CheckOutPage = () => {

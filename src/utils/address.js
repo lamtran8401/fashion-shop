@@ -20,7 +20,7 @@ const getUserAddress = async () => {
 const getDefaultAddress = async () => {
   const addresses = await getUserAddress()
   if (!addresses) return null
-  return addresses.find(item => item.default)
+  return addresses.find(item => item.isDefault)
 }
 
 export { getDefaultAddress, getUserAddress }

@@ -1,5 +1,5 @@
 import useCart from '@/features/cart/hooks/useCart'
-import useCheckOut from '@/features/checkout/hooks/useCheckout'
+import useCheckOut from '@/features/checkout/hooks/useCheckOut'
 import useNotify from '@/hooks/useNotify'
 import getAddress, { getDefaultAddress } from '@/utils/address'
 import toCurrency from '@/utils/currency'
@@ -30,7 +30,10 @@ const ProductDetailPage = () => {
     carouselRef.current.next()
   }
 
-  const colorOptions = useMemo(() => productDetails.map(productDetail => productDetail.color), [])
+  const colorOptions = useMemo(() => {
+    const options = productDetails.map(productDetail => productDetail.color)
+    return [...new Set(options)]
+  }, [])
 
   const sizeOptions = useMemo(() => {
     const options = productDetails.map(productDetail => productDetail.size)
@@ -105,7 +108,7 @@ const ProductDetailPage = () => {
     action.addItem({
       id,
       name,
-      price,
+      price: detailPrice,
       detailId: productDetail.id,
       images,
       color: colorSelected,

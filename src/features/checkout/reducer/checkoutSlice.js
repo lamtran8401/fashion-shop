@@ -34,9 +34,24 @@ const checkOutSlice = createSlice({
       state.recipient = action.payload
       localStorage.setItem('checkout', JSON.stringify(state))
     },
+
+    clearCheckoutData(state) {
+      state = {
+        items: [],
+        total: 0,
+        totalQuantity: 0,
+        recipient: null,
+        fromCart: false,
+      }
+
+      console.log('clear')
+
+      localStorage.removeItem('checkout')
+    },
   },
 })
 
-export const { createCheckoutData, changeRecipient, changeItems } = checkOutSlice.actions
+export const { createCheckoutData, changeRecipient, changeItems, clearCheckoutData } =
+  checkOutSlice.actions
 
 export default checkOutSlice.reducer

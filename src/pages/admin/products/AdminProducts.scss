@@ -1,0 +1,11 @@
+.admin-products {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}

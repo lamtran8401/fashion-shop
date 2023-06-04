@@ -1,0 +1,23 @@
+.admin-dashboard {
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-height: 100vh;
+    overflow-y: auto;
+
+    &__card {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    &__chart {
+      padding: 2rem;
+      border: 1px solid rgba(#5046e5, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(#5046e5, 0.1);
+      margin-bottom: 2rem;
+    }
+  }
+}

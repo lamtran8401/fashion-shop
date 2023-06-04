@@ -1,7 +1,7 @@
 import addressService from '@/services/address.service'
 import { Button, Modal, Skeleton } from 'antd'
 import { useQuery } from 'react-query'
-import useCheckOut from '../../hooks/useCheckout'
+import useCheckOut from '../../hooks/useCheckOut'
 import ChangeAddressItem from '../ChangeAddressItem'
 import './ChangeAddressModal.scss'
 

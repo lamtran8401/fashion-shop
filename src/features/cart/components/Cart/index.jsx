@@ -1,6 +1,6 @@
 import emptyBagImg from '@/assets/images/empty-bag.jpeg'
 import useCart from '@/features/cart/hooks/useCart'
-import useCheckOut from '@/features/checkout/hooks/useCheckout'
+import useCheckOut from '@/features/checkout/hooks/useCheckOut'
 import useNotify from '@/hooks/useNotify'
 import getAddress, { getDefaultAddress } from '@/utils/address'
 import toCurrency from '@/utils/currency'

@@ -1,0 +1,25 @@
+.btn-upload {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  > svg.icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+.ant-space {
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+}
+
+.btn-add-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

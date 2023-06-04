@@ -9,14 +9,14 @@ import './AccountPage.scss'
 const AccountPage = () => {
   const { notifySuccess } = useNotify()
   const [form] = Form.useForm()
-  const { currentUser, setCurrentUser } = useAuth()
+  const { currentUser, updateCurrentUser } = useAuth()
   const { name, email, phone, birthDate, gender } = currentUser
   const handleSubmit = values => {
-    values.birthDate = values.birthDay.format('DD/MM/YYYY')
+    if (values.birthDay) values.birthDate = values.birthDay.format('DD/MM/YYYY')
     axiosInstance
       .put('/users', values)
       .then(res => {
-        setCurrentUser(res.data)
+        updateCurrentUser(res.data)
         notifySuccess('Cập nhật thông tin thành công', 'Thông tin của bạn đã được cập nhật')
       })
       .catch(err => {

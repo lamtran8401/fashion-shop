@@ -51,7 +51,7 @@ const AddressPage = () => {
             <AddressCard
               key={address.id}
               data={address}
-              selected={address.default}
+              selected={address.isDefault}
               action={{
                 type: 'update',
                 handleAction: handleUpdateAddress,

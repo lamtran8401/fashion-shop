@@ -5,11 +5,11 @@ import './ErrorPage.scss'
 
 const ErrorPage = () => {
   const error = useRouteError()
+  console.log(error)
 
   const status = error?.status || 404
-  const erorrTitle = error?.statusText || 'Page Not Found'
-  const errorMessage =
-    error?.error?.message || 'Sorry, we couldn’t find the page you’re looking for.'
+  const erorrTitle = error?.status ? 'Unauthorized' : 'Page Not Found'
+  const errorMessage = error?.statusText || 'Sorry, we couldn’t find the page you’re looking for.'
 
   return (
     <div className='error-page'>

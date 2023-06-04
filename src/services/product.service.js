@@ -21,7 +21,11 @@ class ProductService extends APIService {
 
   async create(data) {
     try {
-      const response = await this.post('/products', data)
+      const response = await this.post('/products', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       return response
     } catch (error) {
       throw error
@@ -40,6 +44,15 @@ class ProductService extends APIService {
   async delete(id) {
     try {
       const response = await this.delete(`/products/${id}`)
+      return response
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async deleteDetailsById(detailIds) {
+    try {
+      const response = await this.put(`/products/delete`, detailIds)
       return response
     } catch (error) {
       throw error

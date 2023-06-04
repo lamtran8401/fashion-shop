@@ -20,7 +20,7 @@ const AddressModal = ({ title, visible, onCancel, data, action }) => {
           district: values.address[1],
           ward: values.address[2],
           detail: values.detail,
-          default: values.default,
+          default: values.isDefault,
         }
         setLoading(true)
         return formReq
@@ -55,7 +55,7 @@ const AddressModal = ({ title, visible, onCancel, data, action }) => {
   }
 
   const onChangeDefault = value => {
-    form.setFieldsValue({ default: value })
+    form.setFieldsValue({ isDefault: value })
   }
 
   return (
@@ -76,7 +76,7 @@ const AddressModal = ({ title, visible, onCancel, data, action }) => {
           phone: data?.phone,
           address: [data?.province, data?.district, data?.ward],
           detail: data?.detail,
-          default: data?.default,
+          default: data?.isDefault,
         }}>
         <Form.Item
           name='receiver'
@@ -123,11 +123,11 @@ const AddressModal = ({ title, visible, onCancel, data, action }) => {
           <Input placeholder='Nhập địa chỉ cụ thể' />
         </Form.Item>
         <Form.Item
-          name='default'
+          name='isDefault'
           label='Đặt làm địa chỉ mặc định'
           className='form__item'
           valuePropName='checked'>
-          <Switch defaultChecked={data ? data.default : false} onChange={onChangeDefault} />
+          <Switch defaultChecked={data ? data.isDefault : false} onChange={onChangeDefault} />
         </Form.Item>
       </Form>
     </Modal>

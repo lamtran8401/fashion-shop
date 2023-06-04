@@ -3,7 +3,7 @@ import { Input } from 'antd'
 import { memo, useEffect, useState } from 'react'
 import './Search.scss'
 
-const Search = ({ size = 'small', placeholder = 'Search...' }) => {
+const Search = ({ size = 'small', placeholder = 'Search...', className }) => {
   const [searchValue, setSearchValue] = useState('')
 
   const debouncedValue = useDebounce(searchValue, 500)
@@ -28,7 +28,7 @@ const Search = ({ size = 'small', placeholder = 'Search...' }) => {
   }
 
   return (
-    <div className='search-bar'>
+    <div className={`search-bar ${className}`}>
       <Input.Search
         size={size}
         className='search-input'
