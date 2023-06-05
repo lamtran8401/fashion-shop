@@ -12,4 +12,18 @@ const orderStatusString = {
   CANCELED: 'Đã hủy',
 }
 
-export { orderStatus, orderStatusString }
+const orderNum = {
+  PENDING: 0,
+  DELIVERING: 1,
+  DELIVERED: 2,
+  CANCELED: 3,
+}
+
+const orderEnum = {
+  PENDING: 'PENDING',
+  DELIVERING: 'DELIVERING',
+  DELIVERED: 'DELIVERED',
+  CANCELED: 'CANCELED',
+}
+
+export { orderEnum, orderNum, orderStatus, orderStatusString }
